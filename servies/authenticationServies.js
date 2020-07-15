@@ -53,7 +53,7 @@ exports.requiresLogin = async (request, response, next) => {
 
 exports.requiresAdmins = async (request, response, next) => {
     const user = request.user
-    if (user.role != "Admins") {
+    if (user.role != "admin") {
         return response.status(401).json({
             status: "Fail",
             message: "Admins is wrong"

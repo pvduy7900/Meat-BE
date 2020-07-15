@@ -1,23 +1,32 @@
+
+const bcrypt = require("bcrypt")
 const User = require("../models/userModels")
+const { loginWithEmail, generateToken } = require("../servies/authenticationServies")
+
 
 exports.createUser = async (request, response) => {
     try {
-        const { name, email, password } = request.body
+        const { name, email, password, role } = request.body
         if (!name || !email || !password) {
             return response.status(400).json({
                 message: "name, email, password is required"
             })
         }
 
+        const hashedPassword = await bcrypt.hash(request.body.password, 10)
+
         const newUser = await User.create({
             name: name,
             email: email,
-            password: password
+            password: hashedPassword,
+            role
         })
+
+        const token = await generateToken(newUser)
 
         response.status(200).json({
             status: "create success",
-            data: newUser
+            data: { newUser, token }
         })
 
     } catch (error) {
@@ -61,6 +70,8 @@ exports.login = async (request, response) => {
             status: "success",
             data: { user, token }
         })
+
+
     } catch (error) {
         response.status(400).json({
             message: error.message
@@ -89,7 +100,7 @@ exports.logout = async (request, response) => {
         await user.save()
         response.status(200).json({
             status: "log out success",
-            data: null
+            data: user
         })
     } catch (error) {
         response.status(400).json({

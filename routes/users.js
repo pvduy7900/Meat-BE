@@ -3,7 +3,7 @@ var router = express.Router();
 const { getUserList, createUser,login,logout, updateUser } = require("../controlles/userController")
 
 
-router.route("/uses")
+router.route("/users")
     .get(getUserList)
     .post(createUser)
 

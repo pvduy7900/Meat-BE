@@ -11,7 +11,8 @@ require("dotenv").config({ path: ".env" }); //thêm vào
 var indexRouter = require('./routes/index');
 
 const usersRouter = require('./routes/users');
-// const experienceRouter = require("./routes/experience");
+const categoryRouter = require("./routes/category")
+const productRouter = require("./routes/product");
 // const reviewsRouter = require("./routes/reviews"); // gắn link với sever
 // const tagsRouter = require("./routes/tags");
 
@@ -35,8 +36,8 @@ app.use('/users', usersRouter);
 
 app.use(usersRouter); // helloooooooo, this one must be change, nhìn phía trên sẽ thấy
 // app.use(reviewsRouter); // tương tự nè
-// app.use(experienceRouter);
-// app.use(tagsRouter);
+app.use(productRouter);
+app.use(categoryRouter);
 
 
 // catch 404 and forward to error handler

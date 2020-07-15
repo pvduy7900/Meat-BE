@@ -9,28 +9,28 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: "name is required"
     },
-    categoryID: [
+    categoryID: 
         {
-            type: mongoose.Schema.ObjectID,
+            type: mongoose.Schema.ObjectId,
             ref: "Category",
             required: "name is required"
         }
-    ],
+    ,
     description: {
-    type: String,
-    required: "name is required"
-},
+        type: String,
+        required: "name is required"
+    },
     preparing: {
-    type: String,
-    required: "name is required"
-},
-    review: [
-    {
-        type: mongoose.Schama.ObjectID,
-        ref: "Review",
-        required:"review is required"
-    }
-]
+        type: String,
+        required: "name is required"
+    },
+    // review: [
+    //     {
+    //         type: mongoose.Schema.ObjectID,
+    //         ref: "Review",
+    //         required: "review is required"
+    //     }
+    // ]
 })
 
 const Product = mongoose.model("Product", productSchema)
