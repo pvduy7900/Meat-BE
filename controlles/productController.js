@@ -1,6 +1,21 @@
 const Product = require("../models/productModels")
 const { response } = require("express")
 
+exports.getAllProduct = async (request, response) => {
+    try {
+        const productList = await Product.find({})
+        response.status(200).json({
+            status: "Success",
+            data: productList
+        })
+
+    } catch (error) {
+        response.status(400).json({
+            status: "Fail",
+            message: error.message
+        })
+    }
+}
 
 exports.getProduct = async (request, response) => {
     try {

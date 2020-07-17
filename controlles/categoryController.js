@@ -1,6 +1,24 @@
 
 const Category = require("../models/categoryModels")
 
+exports.getCategory = async (request, response) => {
+    try {
+
+        const newCategory = await Category.find({})
+        response.status(200).json({
+            status: "success",
+            data: newCategory
+        })
+
+
+    } catch (error) {
+        response.status(400).json({
+            status: "Fail",
+            messages: error.messages
+        })
+    }
+}
+
 exports.createCategory = async (request, response) => {
     try {
         const { name, code } = request.body
@@ -12,12 +30,12 @@ exports.createCategory = async (request, response) => {
         }
 
         const newCategory = await Category.create({
-            name :name,
-            code : code
+            name: name,
+            code: code
         })
 
         response.status(200).json({
-            status:"Success",
+            status: "Success",
             data: newCategory
         })
 

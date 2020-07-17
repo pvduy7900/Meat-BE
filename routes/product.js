@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 const { requiresLogin, requiresAdmins } = require("../servies/authenticationServies")
-const { createProduct, getProduct } = require("../controlles/productController")
+const { createProduct, getProduct,getAllProduct } = require("../controlles/productController")
 
 router.route("/product")
     .post(requiresLogin, requiresAdmins, createProduct)
-// .get()
+    .get(getAllProduct)
 
 
 router.route("/product/:categoryID")
