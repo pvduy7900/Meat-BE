@@ -38,6 +38,7 @@ exports.requiresLogin = async (request, response, next) => {
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET)
         const user = await User.findOne({ _id: decode.id, tokens: token })
+        // tìm user trong database thông qua id và token dược nhập từ máy
         if (!user) throw new Error("Unauthorized")
         // 
         request.user = user 

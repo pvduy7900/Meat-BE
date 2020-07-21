@@ -87,6 +87,7 @@ exports.logout = async (request, response) => {
     // 3. trả lời lại cho clients
     try {
         const token = request.body.token
+        console.log("token1", token)
         if (!token) {
             response.status(400).json({
                 status: "fail",
@@ -95,8 +96,11 @@ exports.logout = async (request, response) => {
         }
 
         const user = await User.findOne({ tokens: token })
+        console.log("user", user)
+        console.log("user1", user.tokens)
 
-        user.tokens = user.tokens.filter(token => token != token)
+        user.tokens = user.tokens.filter(item => item != token)
+        console.log("user2", user.tokens)
         await user.save()
         response.status(200).json({
             status: "log out success",

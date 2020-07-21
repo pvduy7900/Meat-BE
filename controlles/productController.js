@@ -35,8 +35,8 @@ exports.getProduct = async (request, response) => {
 
 exports.createProduct = async (request, response) => {
     try {
-        const { name, price, description, preparing, categoryID } = request.body
-        if (!name || !price || !description || !preparing || !categoryID) {
+        const { name, price, description, preparing, categoryID , img} = request.body
+        if (!name || !price || !description || !preparing || !categoryID || !img) {
             return response.status(400).json({
                 status: "some thing missing",
                 messages: error.messages
@@ -48,7 +48,8 @@ exports.createProduct = async (request, response) => {
             price,
             description,
             preparing,
-            categoryID
+            categoryID,
+            img
         })
 
 

@@ -23,7 +23,10 @@ const productSchema = mongoose.Schema({
     preparing: {
         type: String,
         required: "name is required"
-    },
+    },img: {
+        type: String,
+        required: "img is required"
+    }
     // review: [
     //     {
     //         type: mongoose.Schema.ObjectID,
